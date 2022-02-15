@@ -1,51 +1,21 @@
-import React, { Component } from "react";
-import ContactsList from "./componets/ContactsList";
-import ContactForm from "./componets/ContactForm";
-import Filter from "./componets/Filter";
-import Container from "./componets/Container";
-import s from "./App.module.css";
-import shortid from "shortid";
+import React, { Component } from 'react';
+import ContactsList from './componets/ContactsList';
+import ContactForm from './componets/ContactForm';
+import Filter from './componets/Filter';
+import Container from './componets/Container';
+import s from './App.module.css';
+import shortid from 'shortid';
 
 class App extends Component {
   state = {
     contacts: [
-      // { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
-      // { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
-      // { id: "id-3", name: "Eden Clements", number: "645-17-79" },
-      // { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
+      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
-    filter: "",
+    filter: '',
   };
-
-  componentDidMount() {
-    // console.log('App componentDidMount');
-
-    const contacts = localStorage.getItem("contacts");
-    const parsedContacts = JSON.parse(contacts);
-
-    if (parsedContacts) {
-      this.setState({ contacts: parsedContacts });
-    }
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    // console.log('App componentDidUpdate');
-
-    const nextContacts = this.state.contacts;
-    const prevContacts = prevState.contacts;
-
-    if (nextContacts !== prevContacts) {
-      console.log("Обновилось поле todos, записываю todos в хранилище");
-      localStorage.setItem("contacts", JSON.stringify(nextContacts));
-    }
-
-    // if (
-    //   nextContacts.length > prevContacts.length &&
-    //   prevContacts.length !== 0
-    // ) {
-    //   this.toggleModal();
-    // }
-  }
 
   formSubmitHandler = ({ name, number }) => {
     const newContact = {
@@ -56,18 +26,18 @@ class App extends Component {
 
     if (
       this.state.contacts.find(
-        (contact) => contact.name.toLowerCase() === name.toLowerCase()
+        contact => contact.name.toLowerCase() === name.toLowerCase(),
       )
     ) {
       return alert(`${name} is alredy in contacts`);
     }
 
-    this.setState((prevState) => ({
+    this.setState(prevState => ({
       contacts: [newContact, ...prevState.contacts],
     }));
   };
 
-  changeFilter = (e) => {
+  changeFilter = e => {
     this.setState({ filter: e.currentTarget.value });
   };
 
@@ -75,14 +45,14 @@ class App extends Component {
     const { filter, contacts } = this.state;
     const normolizedFilter = filter.toLowerCase();
 
-    return contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(normolizedFilter)
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normolizedFilter),
     );
   };
 
-  deleteContact = (id) => {
-    this.setState((prevState) => ({
-      contacts: prevState.contacts.filter((contact) => contact.id !== id),
+  deleteContact = id => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== id),
     }));
   };
 
@@ -114,3 +84,35 @@ class App extends Component {
 }
 
 export default App;
+
+//   componentDidMount() {
+//     // console.log('App componentDidMount');
+
+//     const contacts = localStorage.getItem('contacts');
+//     const parsedContacts = JSON.parse(contacts);
+
+//     if (parsedContacts) {
+//       this.setState({ contacts: parsedContacts });
+//     }
+//   }
+
+//   componentDidUpdate(prevProps, prevState) {
+//     // console.log('App componentDidUpdate');
+
+//     const nextContacts = this.state.contacts;
+//     const prevContacts = prevState.contacts;
+
+//     if (nextContacts !== prevContacts) {
+//       console.log('add');
+//       localStorage.setItem('contacts', JSON.stringify(nextContacts));
+//     }
+
+//     if (
+//       nextContacts.length > prevContacts.length &&
+//       prevContacts.length !== 0
+//     ) {
+//       this.getVisibleContacts();
+//     }
+//   }
+
+//

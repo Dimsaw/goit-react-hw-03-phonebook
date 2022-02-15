@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import s from "./ContactList.module.css";
-import ContactItem from "../ContactItem";
+import React from 'react';
+import PropTypes from 'prop-types';
+import s from './ContactList.module.css';
+import ContactItem from '../ContactItem';
 
 const ContactsList = ({ contacts, onDeleteContact }) => (
   <ul className={s.list}>
@@ -9,7 +9,7 @@ const ContactsList = ({ contacts, onDeleteContact }) => (
       <ContactItem
         name={name}
         number={number}
-        key={id}
+        id={id}
         btnDelete={onDeleteContact}
       />
     ))}
@@ -24,7 +24,7 @@ ContactsList.propTypes = {
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       number: PropTypes.string.isRequired,
-    })
+    }),
   ),
   onDeleteContact: PropTypes.func.isRequired,
 };
